@@ -24,7 +24,7 @@ This folder contains the AWS Lambda entry point for the repository analyzer.
    ```
 5. After deployment, the Lambda will run the analyzer and store the JSON output in:
    - `/tmp/repositories.json` inside the Lambda runtime
-   - `s3://<bucket-name>/reports/repositories.json` if S3 output is enabled
+   - `s3://<bucket-name>/reports/repositories.json` because S3 output is enabled by default in the Terraform configuration
 
 ## Notes
 - The Lambda handler is defined in [lambda_function.py](lambda_function.py).

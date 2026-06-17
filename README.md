@@ -55,7 +55,8 @@ terraform apply
 
 ### Output behavior
 - The Lambda writes the JSON report to `/tmp/repositories.json`
-- The Terraform setup also uploads that file to an S3 bucket created by the infrastructure
+- The Terraform setup also uploads that file to an S3 bucket created by the infrastructure at `s3://<bucket-name>/reports/repositories.json`
+- S3 output is enabled by default in the Terraform configuration
 
 See [infra/README.md](infra/README.md) for more details.
 
