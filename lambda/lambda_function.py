@@ -18,8 +18,9 @@ def lambda_handler(event, context):
     token = os.environ.get('GITHUB_TOKEN', '')
     output_file = os.environ.get('OUTPUT_FILE', '/tmp/repositories.json')
     months = int(os.environ.get('RECENT_MONTHS', '3'))
+    s3_enabled = os.environ.get('S3_OUTPUT_ENABLED', 'true').lower() == 'true'
     bucket_name = os.environ.get('S3_BUCKET_NAME', '').strip()
-    bucket_key = os.environ.get('S3_BUCKET_KEY', 'repositories/repositories.json')
+    bucket_key = os.environ.get('S3_BUCKET_KEY', 'reports/repositories.json')
 
     if not org:
         return {
@@ -38,7 +39,7 @@ def lambda_handler(event, context):
         file.write('\n')
 
     s3_upload_uri = None
-    if bucket_name:
+    if s3_enabled and bucket_name:
         S3_CLIENT.upload_file(str(output_path), bucket_name, bucket_key)
         s3_upload_uri = f"s3://{bucket_name}/{bucket_key}"
 

@@ -98,12 +98,13 @@ resource "aws_lambda_function" "repo_analyzer" {
 
   environment {
     variables = {
-      GITHUB_ORG     = var.github_org
-      GITHUB_TOKEN   = var.github_token
-      OUTPUT_FILE    = "/tmp/repositories.json"
-      RECENT_MONTHS  = var.recent_months
-      S3_BUCKET_NAME = aws_s3_bucket.repo_output.bucket
-      S3_BUCKET_KEY  = "reports/repositories.json"
+      GITHUB_ORG       = var.github_org
+      GITHUB_TOKEN     = var.github_token
+      OUTPUT_FILE      = "/tmp/repositories.json"
+      RECENT_MONTHS    = var.recent_months
+      S3_OUTPUT_ENABLED = "true"
+      S3_BUCKET_NAME   = aws_s3_bucket.repo_output.bucket
+      S3_BUCKET_KEY    = "reports/repositories.json"
     }
   }
 
@@ -178,4 +179,12 @@ output "lambda_function_name" {
 
 output "schedule_rule" {
   value = aws_cloudwatch_event_rule.weekly_schedule.name
+}
+
+output "s3_bucket_name" {
+  value = aws_s3_bucket.repo_output.bucket
+}
+
+output "s3_bucket_name" {
+  value = aws_s3_bucket.repo_output.bucket
 }
