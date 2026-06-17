@@ -1,0 +1,5 @@
+aws_region     = "us-east-1"
+project_name   = "git-analizer"
+github_org     = "your-org-name"
+github_token   = "your-github-token"
+recent_months  = 3
